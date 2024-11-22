@@ -4,9 +4,9 @@ import sys
 import numpy as np
 import pandas as pd
 import sklearn
+import matplotlib.pyplot as plt
 import csv
 from scipy.stats import pearsonr, spearmanr
-import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.manifold import MDS
