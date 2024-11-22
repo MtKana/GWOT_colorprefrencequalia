@@ -20,7 +20,60 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 def add_colored_label(ax, x, y, bgcolor, width=1, height=1):
   rect = Rectangle((x, y), width, height, facecolor=bgcolor)
   ax.add_patch(rect)
-  
+
+def show_heatmaps(vmin_val, vmax_val, matrices, titles, cbar_label=None, color_labels=None):
+    num_plots = len(matrices)
+    grid_size = math.ceil(math.sqrt(num_plots))  # Determine the grid size
+    fig, axs = plt.subplots(grid_size, grid_size, figsize=(5 * grid_size, 5 * grid_size))
+
+    # Flatten the axes array if it is 2D
+    if isinstance(axs, np.ndarray):
+        axs = axs.ravel()
+    else:
+        axs = [axs]
+
+    for i, (matrix, title) in enumerate(zip(matrices, titles)):
+        ax = axs[i]
+        
+        im = ax.imshow(matrix, aspect='auto', vmin=vmin_val, vmax=vmax_val)
+        ax.set_title(title)
+
+        # Set axis labels
+        ax.set_xlabel("Right")  # Label for x-axis
+        ax.set_ylabel("Left")   # Label for y-axis
+
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        cbar = fig.colorbar(im, cax=cax)
+        cbar.set_label(cbar_label)
+
+        # Adjust the height of the color bar
+        position = cax.get_position()
+        new_position = [position.x0, position.y0 + 0.1, position.width, position.height * 0.8]
+        cax.set_position(new_position)
+
+        if color_labels is not None:
+            ax.axis('off')
+            for idx, color in enumerate(color_labels):
+                add_colored_label(ax, -1.5, idx - 0.5, color, width=0.8)
+                add_colored_label(ax, idx - 0.5, matrix.shape[1] - 0.2, color, height=0.8)
+
+            ax.set_aspect('equal')
+            ax.set_xlim(-3.0, matrix.shape[1])
+            ax.set_ylim(-1, len(color_labels) + 1.4)
+            ax.invert_yaxis()
+
+            for spine in ax.spines.values():
+                spine.set_visible(False)
+
+    # Hide unused axes
+    for ax in axs[num_plots:]:
+        ax.axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
+"""
 def show_heatmaps(vmin_val, vmax_val, matrices, titles, cbar_label=None, color_labels=None):
     num_plots = len(matrices)
     fig, axs = plt.subplots(1, num_plots, figsize=(5*num_plots, 5))
@@ -64,7 +117,7 @@ def show_heatmaps(vmin_val, vmax_val, matrices, titles, cbar_label=None, color_l
 
     plt.tight_layout()
     plt.show()
-
+"""
 def show_heatmap(matrix, title, cbar_label=None, color_labels=None):
     fig, ax = plt.subplots(figsize=(5, 5))
 
