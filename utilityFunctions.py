@@ -15,6 +15,7 @@ import ot
 import plotly.graph_objs as go
 import plotly.express as px
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+import math
 
 
 def add_colored_label(ax, x, y, bgcolor, width=1, height=1):
