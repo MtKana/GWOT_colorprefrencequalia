@@ -49,8 +49,6 @@ def sort_files_in_directory(directory_path):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         return []
-    
-    return sorted_files
 
 
 # Display multiple matrices as a subplot
