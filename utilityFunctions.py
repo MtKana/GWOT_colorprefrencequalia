@@ -17,6 +17,8 @@ import plotly.express as px
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import math
 
+def load_csv(file_path):
+    return pd.read_csv(file_path)
 
 def add_colored_label(ax, x, y, bgcolor, width=1, height=1):
   rect = Rectangle((x, y), width, height, facecolor=bgcolor)
