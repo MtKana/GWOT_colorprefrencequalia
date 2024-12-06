@@ -25,6 +25,34 @@ def add_colored_label(ax, x, y, bgcolor, width=1, height=1):
   ax.add_patch(rect)
 
 
+def sort_files_in_directory(directory_path):
+    """
+    Sorts and returns a list of file names in a specified directory.
+
+    Args:
+    - directory_path (str): Path to the directory containing the files.
+
+    Returns:
+    - List[str]: A sorted list of file names in the directory.
+    """
+    try:
+        # List all files in the directory
+        files = os.listdir(directory_path)
+        
+        # Sort files alphabetically (default behavior of sort())
+        files.sorted(reversed=False)  
+        
+        return files
+    except FileNotFoundError:
+        print(f"Error: The directory '{directory_path}' does not exist.")
+        return []
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return []
+    
+    return sorted_files
+
+
 # Display multiple matrices as a subplot
 #
 # INPUTS:
