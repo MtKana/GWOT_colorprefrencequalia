@@ -51,7 +51,7 @@ def show_heatmaps(vmin_val, vmax_val, matrices, titles, cbar_label=None, color_l
         ax = axs[i]
         
         im = ax.imshow(matrix, aspect='auto', vmin=vmin_val, vmax=vmax_val)
-        ax.set_title(title)
+        ax.set_title(title, fontsize=18)
 
         # Set axis labels
         ax.set_xlabel("Right")  # Label for x-axis
@@ -60,7 +60,8 @@ def show_heatmaps(vmin_val, vmax_val, matrices, titles, cbar_label=None, color_l
         divider = make_axes_locatable(ax)
         cax = divider.append_axes("right", size="5%", pad=0.05)
         cbar = fig.colorbar(im, cax=cax)
-        cbar.set_label(cbar_label)
+        cbar.set_label(cbar_label, fontsize=18)
+        cbar.ax.tick_params(labelsize=18)
 
         # Adjust the height of the color bar
         position = cax.get_position()
