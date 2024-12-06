@@ -24,6 +24,18 @@ def add_colored_label(ax, x, y, bgcolor, width=1, height=1):
   rect = Rectangle((x, y), width, height, facecolor=bgcolor)
   ax.add_patch(rect)
 
+
+# Display multiple matrices as a subplot
+#
+# INPUTS:
+#   vmin_val: number, minimum of colour scale
+#   vmin_val: number, maximum of colour scale
+#   matrices: list, list of 2D numpy matrices
+#   titles: list, list of title strings for each subplot
+#   cbar_label: string, title for colour bars
+#   color_labels: dictionary, dictionary of colours and their ids (x/y axis position), {colour:id}
+# OUTPUTS:
+#   Returns nothing, just plots
 def show_heatmaps(vmin_val, vmax_val, matrices, titles, cbar_label=None, color_labels=None):
     num_plots = len(matrices)
     grid_size = math.ceil(math.sqrt(num_plots))  # Determine the grid size
