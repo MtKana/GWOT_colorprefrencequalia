@@ -40,7 +40,7 @@ def sort_files_in_directory(directory_path):
         files = os.listdir(directory_path)
         
         # Sort files alphabetically (default behavior of sort())
-        files.sorted(reversed=False)  
+        files.sort()  
         
         return files
     except FileNotFoundError:
